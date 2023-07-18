@@ -1,0 +1,13 @@
+{
+  "name": "herocoders",
+  "version": "1.0.0",
+  "description": "coding exercise",
+  "main": "./src/main.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "pkochanski",
+  "license": "ISC",
+  "type": "module"
+}
