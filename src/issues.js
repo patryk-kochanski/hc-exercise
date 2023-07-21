@@ -19,8 +19,8 @@ async function fetchIssues(pagingOptions) {
         return data;
     } catch (err) {
         console.error('Could not fetch issues.') // Some proper error handling and logging here.
+        throw err;
     }
-    return {};
 }
 
 

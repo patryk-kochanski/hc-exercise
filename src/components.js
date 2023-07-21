@@ -7,8 +7,8 @@ export async function getComponents() {
         return data;
     } catch (err) {
         console.error('Could not fetch components.') // Some proper error handling and logging here.
+        throw err;
     }
-    return [];
 }
 
 export async function getLeadlessComponents() {
