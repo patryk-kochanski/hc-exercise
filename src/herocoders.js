@@ -3,14 +3,14 @@ import { getIssues } from "./issues.js";
 
 export async function getLeadlessComponentsWithIssueCount() {
     const components = await getLeadlessComponents();
-    if(!components.length) {
+    if (!components.length) {
         return;
     }
 
     const issues = await getIssues();
     const matched = matchIssuesToComponents(issues, components);
 
-    return Array.from(matched, ([key, value]) => ({ component: key, issueCount: value.length}));
+    return Array.from(matched, ([key, value]) => ({ component: key, issueCount: value.length }));
 }
 
 function matchIssuesToComponents(issues, components) {
@@ -18,7 +18,7 @@ function matchIssuesToComponents(issues, components) {
     issues.forEach(issue => {
         issue.fields.components.forEach(component => {
             const found = componentsWithIssues.get(component.name);
-            if(found) {
+            if (found) {
                 found.push(issue);
             }
         })

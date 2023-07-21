@@ -4,12 +4,12 @@ export async function getIssues() {
     return await getIssuesRecursive();
 }
 
-async function getIssuesRecursive(total = Number.MAX_SAFE_INTEGER, pagingOptions = {maxResults: -1, startAt: 0}) {
-    if(pagingOptions.startAt >= total) {
+async function getIssuesRecursive(total = Number.MAX_SAFE_INTEGER, pagingOptions = { maxResults: -1, startAt: 0 }) {
+    if (pagingOptions.startAt >= total) {
         return [];
     }
     const data = await fetchIssues(pagingOptions);
-    return [...data.issues, ...await getIssuesRecursive(data.total, { maxResults: data.maxResults, startAt: data.startAt + data.maxResults})];
+    return [...data.issues, ...await getIssuesRecursive(data.total, { maxResults: data.maxResults, startAt: data.startAt + data.maxResults })];
 }
 
 async function fetchIssues(pagingOptions) {
@@ -23,7 +23,6 @@ async function fetchIssues(pagingOptions) {
     }
 }
 
-
 function createIssuesURL(url, pagingOptions) {
     return `${new URL(url)}&${new URLSearchParams(pagingOptions)}`; // will work with appended '&' and no params at the end
 }
@@ -35,9 +34,9 @@ async function getIssuesConcurrently() {
     const totalRequests = Math.ceil((await getTotalIssues()) / issuesMaxResult);
     const issues = await Promise.all(
         new Array(totalRequests)
-        .fill(null)
-        .map(async (val, index) => getIssuesData({ maxResults: issuesMaxResult, startAt: index * issuesMaxResult})
-    ));
+            .fill(null)
+            .map(async (val, index) => getIssuesData({ maxResults: issuesMaxResult, startAt: index * issuesMaxResult })
+            ));
     return issues.flat();
 }
 
